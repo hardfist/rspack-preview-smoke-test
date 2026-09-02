@@ -1,0 +1,58 @@
+name: Rspack Preview Smoke Test
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke-test:
+    name: Linux x64 glibc
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Enable pnpm
+        run: |
+          corepack enable
+          pnpm --version
+
+      - name: Install Rspack preview
+        run: |
+          pnpm add --save-dev \
+            https://pkg.pr.new/web-infra-dev/rspack/@rspack/core@1530354 \
+            https://pkg.pr.new/web-infra-dev/rspack/@rspack/cli@1530354
+
+      - name: Verify Linux binding
+        run: |
+          node - <<'NODE'
+          const corePackage = require("@rspack/core/package.json");
+          const bindingPath = require.resolve("@rspack/binding-linux-x64-gnu");
+
+          console.log("Rspack preview version:", corePackage.version);
+          console.log("Rspack binding:", bindingPath);
+
+          if (!bindingPath.includes("binding-linux-x64-gnu")) {
+            throw new Error(`Unexpected binding: ${bindingPath}`);
+          }
+          NODE
+
+      - name: Build fixture
+        run: pnpm build
+
+      - name: Run bundle
+        run: pnpm test
+
+      - name: Verify output
+        run: test -f dist/main.js
