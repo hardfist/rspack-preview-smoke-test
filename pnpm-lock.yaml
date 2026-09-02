@@ -1,0 +1,70 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    devDependencies:
+      '@rspack/cli':
+        specifier: https://pkg.pr.new/web-infra-dev/rspack/@rspack/cli@1530354
+        version: https://pkg.pr.new/web-infra-dev/rspack/@rspack/cli@1530354(@rspack/core@https://pkg.pr.new/web-infra-dev/rspack/@rspack/core@1530354)
+      '@rspack/core':
+        specifier: https://pkg.pr.new/web-infra-dev/rspack/@rspack/core@1530354
+        version: https://pkg.pr.new/web-infra-dev/rspack/@rspack/core@1530354
+
+packages:
+
+  '@rspack/binding-linux-x64-gnu@https://pkg.pr.new/web-infra-dev/rspack/@rspack/binding-linux-x64-gnu@1530354289af47cfaa219d3b412673149712e90f':
+    resolution: {integrity: sha512-18K4TvtFIorzpQfeYXsNN3SOV+iJjrdwFq1k271SCifF+8G+pKr9vuYPY69NZ3jEH2jTWcThDdRGFaXixqgM4Q==, tarball: https://pkg.pr.new/web-infra-dev/rspack/@rspack/binding-linux-x64-gnu@1530354289af47cfaa219d3b412673149712e90f}
+    version: 2.2.2
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
+  '@rspack/binding@https://pkg.pr.new/web-infra-dev/rspack/@rspack/binding@1530354289af47cfaa219d3b412673149712e90f':
+    resolution: {integrity: sha512-m73WdaN8KqRiDqzmV1SgHe5Ht9ozC7x1FdQAhJGcMFFviASsbJxv0DLasw7rLvHsEK3WF7Z6XBlfXiAU92ECVQ==, tarball: https://pkg.pr.new/web-infra-dev/rspack/@rspack/binding@1530354289af47cfaa219d3b412673149712e90f}
+    version: 2.2.2
+
+  '@rspack/cli@https://pkg.pr.new/web-infra-dev/rspack/@rspack/cli@1530354':
+    resolution: {integrity: sha512-2YGir9CfB3y1OE9w7AiIPDFlnPMGgxhkhLMUiGkFiHUpHGzlNkE5yZ+a4npDpYJ7YMAf/b79JPbHo2KZs430WQ==, tarball: https://pkg.pr.new/web-infra-dev/rspack/@rspack/cli@1530354}
+    version: 2.2.2
+    hasBin: true
+    peerDependencies:
+      '@rspack/core': ^2.0.0-0
+      '@rspack/dev-server': ^2.0.0-0
+    peerDependenciesMeta:
+      '@rspack/dev-server':
+        optional: true
+
+  '@rspack/core@https://pkg.pr.new/web-infra-dev/rspack/@rspack/core@1530354':
+    resolution: {integrity: sha512-ZHi8W5yg+UVQUO+Yb5dbnH415xNr+TXL7jFaLpyDorzlXj+uDkRNIDLDgRyvG7Jn2SL5wgjlaY7DaMzJGSjEgw==, tarball: https://pkg.pr.new/web-infra-dev/rspack/@rspack/core@1530354}
+    version: 2.2.2
+    engines: {node: ^20.19.0 || >=22.12.0}
+    peerDependencies:
+      '@module-federation/runtime-tools': ^0.24.1 || ^2.0.0
+      '@swc/helpers': ^0.5.23
+    peerDependenciesMeta:
+      '@module-federation/runtime-tools':
+        optional: true
+      '@swc/helpers':
+        optional: true
+
+snapshots:
+
+  '@rspack/binding-linux-x64-gnu@https://pkg.pr.new/web-infra-dev/rspack/@rspack/binding-linux-x64-gnu@1530354289af47cfaa219d3b412673149712e90f':
+    optional: true
+
+  '@rspack/binding@https://pkg.pr.new/web-infra-dev/rspack/@rspack/binding@1530354289af47cfaa219d3b412673149712e90f':
+    optionalDependencies:
+      '@rspack/binding-linux-x64-gnu': https://pkg.pr.new/web-infra-dev/rspack/@rspack/binding-linux-x64-gnu@1530354289af47cfaa219d3b412673149712e90f
+
+  '@rspack/cli@https://pkg.pr.new/web-infra-dev/rspack/@rspack/cli@1530354(@rspack/core@https://pkg.pr.new/web-infra-dev/rspack/@rspack/core@1530354)':
+    dependencies:
+      '@rspack/core': https://pkg.pr.new/web-infra-dev/rspack/@rspack/core@1530354
+
+  '@rspack/core@https://pkg.pr.new/web-infra-dev/rspack/@rspack/core@1530354':
+    dependencies:
+      '@rspack/binding': https://pkg.pr.new/web-infra-dev/rspack/@rspack/binding@1530354289af47cfaa219d3b412673149712e90f

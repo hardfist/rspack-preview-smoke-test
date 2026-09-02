@@ -28,40 +28,8 @@ jobs:
           corepack enable
           pnpm --version
 
-      - name: Install Rspack preview
-        run: |
-          pnpm add --save-dev \
-            https://pkg.pr.new/web-infra-dev/rspack/@rspack/core@1530354 \
-            https://pkg.pr.new/web-infra-dev/rspack/@rspack/cli@1530354
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-      - name: Verify Linux binding
-        run: |
-          node - <<'NODE'
-          const { createRequire } = require("node:module");
-
-          const corePackage = require("@rspack/core/package.json");
-          const corePath = require.resolve("@rspack/core");
-          const requireFromCore = createRequire(corePath);
-          const bindingPath = requireFromCore.resolve("@rspack/binding");
-          const requireFromBinding = createRequire(bindingPath);
-          const nativeBindingPath = requireFromBinding.resolve(
-            "@rspack/binding-linux-x64-gnu",
-          );
-
-          console.log("Rspack preview version:", corePackage.version);
-          console.log("Rspack binding wrapper:", bindingPath);
-          console.log("Rspack native binding:", nativeBindingPath);
-
-          if (!nativeBindingPath.includes("binding-linux-x64-gnu")) {
-            throw new Error(`Unexpected binding: ${nativeBindingPath}`);
-          }
-          NODE
-
-      - name: Build fixture
-        run: pnpm build
-
-      - name: Run bundle
+      - name: Run smoke test
         run: pnpm test
-
-      - name: Verify output
-        run: test -f dist/main.js

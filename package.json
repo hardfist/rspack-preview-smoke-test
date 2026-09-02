@@ -6,6 +6,10 @@
   "packageManager": "pnpm@11.8.0",
   "scripts": {
     "build": "rspack build",
-    "test": "node dist/main.js"
+    "test": "pnpm run build && node dist/main.js"
+  },
+  "devDependencies": {
+    "@rspack/cli": "https://pkg.pr.new/web-infra-dev/rspack/@rspack/cli@1530354",
+    "@rspack/core": "https://pkg.pr.new/web-infra-dev/rspack/@rspack/core@1530354"
   }
 }
