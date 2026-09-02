@@ -37,14 +37,23 @@ jobs:
       - name: Verify Linux binding
         run: |
           node - <<'NODE'
+          const { createRequire } = require("node:module");
+
           const corePackage = require("@rspack/core/package.json");
-          const bindingPath = require.resolve("@rspack/binding-linux-x64-gnu");
+          const corePath = require.resolve("@rspack/core");
+          const requireFromCore = createRequire(corePath);
+          const bindingPath = requireFromCore.resolve("@rspack/binding");
+          const requireFromBinding = createRequire(bindingPath);
+          const nativeBindingPath = requireFromBinding.resolve(
+            "@rspack/binding-linux-x64-gnu",
+          );
 
           console.log("Rspack preview version:", corePackage.version);
-          console.log("Rspack binding:", bindingPath);
+          console.log("Rspack binding wrapper:", bindingPath);
+          console.log("Rspack native binding:", nativeBindingPath);
 
-          if (!bindingPath.includes("binding-linux-x64-gnu")) {
-            throw new Error(`Unexpected binding: ${bindingPath}`);
+          if (!nativeBindingPath.includes("binding-linux-x64-gnu")) {
+            throw new Error(`Unexpected binding: ${nativeBindingPath}`);
           }
           NODE
 
