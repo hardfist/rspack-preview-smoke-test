@@ -1,0 +1,2 @@
+# pkg.pr.new rewrites workspace dependencies to trusted preview tarball URLs.
+blockExoticSubdeps: false
